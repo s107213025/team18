@@ -26,11 +26,11 @@ function updateJob($id,$stuid,$name, $parent,$subsidy,$contact) {
 
 function getJobList($bossMode) {
 	global $conn;
-	if ($bossMode) {
+	//if ($bossMode) {
 		$sql = "select * from form order by status ;";
-	} else {
+	/*} else {
 		$sql = "select * from form where status = 0;";
-	}
+	}*/
 	$result=mysqli_query($conn,$sql) or die("DB Error: Cannot retrieve message.");
 	return $result;
 }

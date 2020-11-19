@@ -72,6 +72,9 @@ while ($rs = mysqli_fetch_assoc($result)){
 				echo "<a href='mentorEditForm.php?id={$rs['id']}'>contact</a>  ";
 				echo "<a href='todoSetControl.php?act=finish&id={$rs['id']}'>ok</a>  ";				
 			}
+			/* else if ($bossMode == 0) {
+				echo "<a href='todoEditForm.php?id={$rs['id']}'>edit</a>  ";
+			}*/
 
 			break;
 		case 1:
