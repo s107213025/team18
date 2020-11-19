@@ -26,9 +26,9 @@ if (! $rs) {
 
    <input type='hidden' name='id' value='<?php echo $id ?>'>
 
-      sid: <input name="sid" type="text" id="sid" value="<?php echo htmlspecialchars($rs['sid']);?>" /> <br>
+   stuid: <input name="stuid" type="text" id="stuid" value="<?php echo htmlspecialchars($rs['stuid']);?>" /> <br>
 
-      name: <input name="msg" type="text" id="msg" value="<?php echo htmlspecialchars($rs['msg']);?>" /> <br>
+      name: <input name="name" type="text" id="name" value="<?php echo htmlspecialchars($rs['name']);?>" /> <br>
 
       parent: <input name="parent" type="text" id="parent" value="<?php echo htmlspecialchars($rs['parent']);?>" /> <br>
 

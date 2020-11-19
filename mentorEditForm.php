@@ -1,6 +1,6 @@
 <?php
 session_start();
-if (! isset($_SESSION['uID']) or $_SESSION['uID']!="mentor") {
+if (! isset($_SESSION['uID']) or $_SESSION['uID']!="mentor"and"sec") {
  header("Location: loginForm.php");
 } 
 
@@ -23,9 +23,9 @@ if (! $rs) {
 <body>
 <h1>貧困學生補助經費申請表</h1>
 <form method="post" action="todoUpdControl.php">
-
+   stuid:<?php echo $rs['stuid'] ?><br>
    <input type='hidden' name='id' value='<?php echo $id ?>'>
-   sid: <input name="sid" type="text" id="sid" value="<?php echo htmlspecialchars($rs['sid']);?>" /> <br>
+   stuid: <input name="stuid" type="text" id="stuid" value="<?php echo htmlspecialchars($rs['stuid']);?>" /> <br>
     contact: <input name="contact" type="text" id="contact" value="<?php echo htmlspecialchars($rs['contact']);?>" /> <br>
 
 

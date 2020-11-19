@@ -8,7 +8,7 @@ $id=(int)$_POST['id'];
 $subsidy=mysqli_real_escape_string($conn,$_POST['subsidy']);
 $contact=mysqli_real_escape_string($conn,$_POST['contact']);
 
-if ($stuid) { //if title is not empty
+if ($stuid or $contact) { //if title is not empty
 	updateJob($id,$stuid,$name, $parent,$subsidy,$contact);
 	$msg="Message updateded";
 } else {

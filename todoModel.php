@@ -27,7 +27,7 @@ function updateJob($id,$stuid,$name, $parent,$subsidy,$contact) {
 function getJobList($bossMode) {
 	global $conn;
 	if ($bossMode) {
-		$sql = "select * from form order by status desc;";
+		$sql = "select * from form order by status ;";
 	} else {
 		$sql = "select * from form where status = 0;";
 	}

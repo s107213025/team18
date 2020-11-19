@@ -24,7 +24,7 @@ if (isset($_GET['m'])){
 
 
 $result=getJobList($bossMode);
-$jobStatus = array('未完成','已完成','已結案','已取消');
+$jobStatus = array('未審核','老師已審核','通過','不通過');
 
 
 ?>
@@ -60,20 +60,20 @@ while ($rs = mysqli_fetch_assoc($result)){
 	echo "<td>" , htmlspecialchars($rs['parent']), "</td>";
 	echo "<td>" , htmlspecialchars($rs['subsidy']), "</td>";
 	echo "<td>" , htmlspecialchars($rs['contact']), "</td>" ;
-	echo "<td>{$rs['status']}</td><td>";
+	echo "<td>{$jobStatus[$rs['status']]}</td><td>";
 	switch($rs['status']) {
 		case 0:
 			if ($bossMode == 1) {
-				echo "<a href='mentorEditForm.php?id={$rs['id']}'>Edit</a>  ";				
-			}else if($bossMode == 2){
-				echo "<a href='todoSetControl.php?act=ok&id={$rs['id']}'>OK</a>  " ;
-				echo "<a href='todoSetControl.php?act=cancel&id={$rs['id']}'>Cancel</a>  " ;
+				echo "<a href='mentorEditForm.php?id={$rs['id']}'>contact</a>  ";
+				echo "<a href='todoSetControl.php?act=finish&id={$rs['id']}'>ok</a>  ";				
 			}
 
 			break;
 		case 1:
-			echo "<a href='todoSetControl.php?act=ok&id={$rs['id']}'>OK</a>  " ;
-			echo "<a href='todoSetControl.php?act=cancel&id={$rs['id']}'>Cancel</a>  " ;
+			if($bossMode == 2){
+			echo "<a href='todoSetControl.php?act=close&id={$rs['id']}'>yes</a>  " ;
+			echo "<a href='todoSetControl.php?act=cancel&id={$rs['id']}'>no</a>  " ;
+			}
 			break;
 		default:
 			break;
