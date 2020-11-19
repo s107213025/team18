@@ -40,7 +40,7 @@ $jobStatus = array('未審核','老師已審核','通過','不通過');
 <p>Subsidy Application Form !! </p>
 <hr />
 <div><?php echo $msg; ?></div><hr>
-<a href="todoEditForm.php?id=-1">申請補助</a> <br>
+<a href="loginForm.php">login</a>
 <table width="200" border="1">
   <tr>
     <td>id</td>
@@ -53,7 +53,12 @@ $jobStatus = array('未審核','老師已審核','通過','不通過');
 	<td>-</td>
   </tr>
 <?php
+if ($bossMode == 0) {
+	echo "<a href='todoEditForm.php?id=-1'>申請補助</a>  ";
+					
+}
 while ($rs = mysqli_fetch_assoc($result)){
+
 	echo "<tr><td>" . $rs['id'] . "</td>";
 	echo "<td>" . $rs['stuid'] . "</td>";
 	echo "<td>", htmlspecialchars($rs['name']),"</td>";
