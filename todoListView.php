@@ -1,14 +1,19 @@
 <?php
 session_start();
-$mentorMode=0;
+//$mentorMode=0;
 if (! isset($_SESSION['uID']) or $_SESSION['uID']<="") {
 	header("Location: loginForm.php");
 } 
 if ($_SESSION['uID']=='mentor'){
-	$mentortMode = 1;
-} else {
-	$mentorMode=0;
+	$bossMode = 1;
+} elseif($_SESSION['uID']=='pri') {
+	$bossMode=2;
+}elseif($_SESSION['uID']=='sec') {
+	$bossMode=1;
+}else{
+	$bossMode=0;
 }
+
 require("todoModel.php");
 if (isset($_GET['m'])){
 	$msg="<font color='red'>" . $_GET['m'] . "</font>";
@@ -18,7 +23,7 @@ if (isset($_GET['m'])){
 
 
 
-$result=getJobList($mentorMode);
+$result=getJobList($bossMode);
 $jobStatus = array('未完成','已完成','已結案','已取消');
 
 
@@ -45,6 +50,7 @@ $jobStatus = array('未完成','已完成','已結案','已取消');
 	<td>subsidy</td>
     <td>contact</td>
 	<td>status</td>
+	<td>-</td>
   </tr>
 <?php
 while ($rs = mysqli_fetch_assoc($result)){
@@ -54,12 +60,15 @@ while ($rs = mysqli_fetch_assoc($result)){
 	echo "<td>" , htmlspecialchars($rs['parent']), "</td>";
 	echo "<td>" , htmlspecialchars($rs['subsidy']), "</td>";
 	echo "<td>" , htmlspecialchars($rs['contact']), "</td>" ;
-	echo "<td>{$rs['status']}</td></tr>";
+	echo "<td>{$rs['status']}</td><td>";
 	switch($rs['status']) {
 		case 0:
-			if ($mentorMode) {
-				echo "<a href='todoEditForm.php?id={$rs['id']}'>Edit</a>  ";				
-			}else{}
+			if ($bossMode == 1) {
+				echo "<a href='mentorEditForm.php?id={$rs['id']}'>Edit</a>  ";				
+			}else if($bossMode == 2){
+				echo "<a href='todoSetControl.php?act=ok&id={$rs['id']}'>OK</a>  " ;
+				echo "<a href='todoSetControl.php?act=cancel&id={$rs['id']}'>Cancel</a>  " ;
+			}
 
 			break;
 		case 1:

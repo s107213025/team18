@@ -1,13 +1,15 @@
 <?php
 require("todoModel.php");
 
-$title=mysqli_real_escape_string($conn,$_POST['title']);
-$msg=mysqli_real_escape_string($conn,$_POST['msg']);
+$stuid=mysqli_real_escape_string($conn,$_POST['stuid']);
+$name=mysqli_real_escape_string($conn,$_POST['name']);
+$parent=mysqli_real_escape_string($conn,$_POST['parent']);
 $id=(int)$_POST['id'];
-$urgent=mysqli_real_escape_string($conn,$_POST['urgent']);
+$subsidy=mysqli_real_escape_string($conn,$_POST['subsidy']);
+$contact=mysqli_real_escape_string($conn,$_POST['contact']);
 
-if ($title) { //if title is not empty
-	updateJob($id,$title,$msg, $urgent);
+if ($stuid) { //if title is not empty
+	updateJob($id,$stuid,$name, $parent,$subsidy,$contact);
 	$msg="Message updateded";
 } else {
 	$msg= "Message title cannot be empty";
