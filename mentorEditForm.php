@@ -23,9 +23,14 @@ if (! $rs) {
 <body>
 <h1>貧困學生補助經費申請表</h1>
 <form method="post" action="todoUpdControl.php">
-   stuid:<?php echo $rs['stuid'] ?><br>
    <input type='hidden' name='id' value='<?php echo $id ?>'>
-   stuid: <input name="stuid" type="text" id="stuid" value="<?php echo htmlspecialchars($rs['stuid']);?>" /> <br>
+   stuid: <input name="stuid" type="hidden" id="stuid" value="<?php echo $rs['stuid'] ?>" /><?php echo $rs['stuid'] ?><br>
+
+      name: <input name="name" type="hidden" id="name" value="<?php echo $rs['name'] ?>" /><?php echo $rs['name'] ?> <br>
+
+      parent: <input name="parent" type="hidden" id="parent" value="<?php echo $rs['parent'] ?>" /><?php echo $rs['parent'] ?> <br>
+
+   subsidy: <input  name="subsidy" type="hidden" id="subsidy" value="<?php echo $rs['subsidy'] ?>"/> <?php echo $rs['subsidy'] ?><br>
     contact: <input name="contact" type="text" id="contact" value="<?php echo htmlspecialchars($rs['contact']);?>" /> <br>
 
 

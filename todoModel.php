@@ -3,7 +3,7 @@ require_once("dbconnect.php");
 
 function addJob($stuid,$name, $parent,$subsidy,$contact) {
 	global $conn;
-	$sql = "insert into form (stuid,name,parent, subsidy,contact, status) values ('$id','$name', '$parent','$subsidy', '$contact',0);";
+	$sql = "insert into form (stuid ,name ,parent, subsidy ,contact , status) values ('$stuid','$name', '$parent','$subsidy', '$contact',0);";
 	mysqli_query($conn, $sql) or die("Insert failed, SQL query error"); //執行SQL	
 }
 
@@ -58,12 +58,6 @@ function setFinished($jobID) {
 	$sql = "update form set status = 1 where id=$jobID and status = 0;";
 	mysqli_query($conn,$sql) or die("MySQL query error"); //執行SQL
 	
-}
-
-function rejectJob($jobID){
-	global $conn;
-	$sql = "update form set status = 0 where id=$jobID and status = 1;";
-	mysqli_query($conn,$sql);
 }
 
 function setClosed($jobID) {

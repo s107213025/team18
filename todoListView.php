@@ -40,7 +40,7 @@ $jobStatus = array('未審核','老師已審核','通過','不通過');
 <p>Subsidy Application Form !! </p>
 <hr />
 <div><?php echo $msg; ?></div><hr>
-<a href="loginForm.php">login</a>
+<a href="loginForm.php">login</a> 
 <table width="200" border="1">
   <tr>
     <td>id</td>
