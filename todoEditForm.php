@@ -1,7 +1,7 @@
 <?php
 session_start();
-if (! isset($_SESSION['uID']) or $_SESSION['uID']!="boss") {
-	header("Location: loginForm.php");
+if (! isset($_SESSION['uID']) or $_SESSION['uID']!="student") {
+ header("Location: loginForm.php");
 } 
 
 require("todoModel.php");
@@ -9,8 +9,8 @@ require("todoModel.php");
 $id = (int)$_GET['id'];
 $rs = getJobDetail($id);
 if (! $rs) {
-	echo "no data found";
-	exit(0);
+ echo "no data found";
+ exit(0);
 }
 
 ?>
@@ -21,27 +21,29 @@ if (! $rs) {
 <title>無標題文件</title>
 </head>
 <body>
-<h1>Edit Task</h1>
+<h1>貧困學生補助經費申請表</h1>
 <form method="post" action="todoUpdControl.php">
 
-	  <input type='hidden' name='id' value='<?php echo $id ?>'>
+   <input type='hidden' name='id' value='<?php echo $id ?>'>
 
-      task title: <input name="title" type="text" id="title" value="<?php echo htmlspecialchars($rs['title']);?>" /> <br>
+      sid: <input name="sid" type="text" id="sid" value="<?php echo htmlspecialchars($rs['sid']);?>" /> <br>
 
-      task description: <input name="msg" type="text" id="msg" value="<?php echo htmlspecialchars($rs['content']);?>" /> <br>
+      name: <input name="msg" type="text" id="msg" value="<?php echo htmlspecialchars($rs['msg']);?>" /> <br>
 
-	  Urgent Level: <select  name="urgent" type="select" id="urgent" /> 
-				<?php
-					echo "<option value='{$rs['urgent']}'>{$rs['urgent']}</option>";
-				?>
-					<option value='一般'>一般</option>
-					<option value='重要'>重要</option>
-					<option value='緊急'>緊急</option>
-					</select>
-	  <br>
+      parent: <input name="parent" type="text" id="parent" value="<?php echo htmlspecialchars($rs['parent']);?>" /> <br>
+
+   subsidy: <select  name="subsidy" type="select" id="subsidy" /> 
+    <?php
+     echo "<option value='{$rs['subsidy']}'>{$rs['subsidy']}</option>";
+    ?>
+     <option value='低收'>低收入戶</option>
+     <option value='中低收'>中低收入戶</option>
+     <option value='家庭因素'>家庭突發因素</option>
+     </select>
+   <br>
 
       <input type="submit" name="Submit" value="送出" />
-	</form>
+ </form>
   </tr>
 </table>
 </body>

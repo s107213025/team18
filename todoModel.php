@@ -37,18 +37,19 @@ function getJobList($bossMode) {
 
 function getJobDetail($id) {
 	global $conn;
-	/*if ($id == -1) { //-1 stands for adding a new record
+	if ($id == -1) { //-1 stands for adding a new record
 		$rs=[
 			"id" => -1,
-			"title" => "new title",
-			"content" => "job description",
-			"urgent" => "一般"
+			"stuid" =>"學號",
+			"name" => "name",
+			"parent" => "parent",
+			"subsidy" => "低收"
 		];
-	} else {*/
+	} else {
 		$sql = "select stuid,name,parent, subsidy,contact from form where id=$id;";
 		$result=mysqli_query($conn,$sql) or die("DB Error: Cannot retrieve message.");
 		$rs=mysqli_fetch_assoc($result);
-	//}
+	}
 	return $rs;
 }
 

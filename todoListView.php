@@ -1,5 +1,6 @@
 <?php
 session_start();
+$mentorMode=0;
 if (! isset($_SESSION['uID']) or $_SESSION['uID']<="") {
 	header("Location: loginForm.php");
 } 
@@ -34,7 +35,7 @@ $jobStatus = array('未完成','已完成','已結案','已取消');
 <p>Subsidy Application Form !! </p>
 <hr />
 <div><?php echo $msg; ?></div><hr>
-<a href="loginForm.php">login</a> | <a href="todoEditForm.php?id=-1">Add Task</a> <br>
+<a href="todoEditForm.php?id=-1">申請補助</a> <br>
 <table width="200" border="1">
   <tr>
     <td>id</td>
