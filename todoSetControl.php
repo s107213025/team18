@@ -10,6 +10,9 @@ if ($msgID>0) {
 			setFinished($msgID);
 			//$sql = "update todo set status = 1, finishTime=NOW() where id=$msgID and status = 0;";
 			break;
+		case 'secfinish':
+			setSecFinished($msgID);
+			break;
 		case 'close':
 			setClosed($msgID);
 			break;

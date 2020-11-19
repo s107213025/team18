@@ -1,25 +1,25 @@
 <?php
 require_once("dbconnect.php");
 
-function addJob($stuid,$name, $parent,$subsidy,$contact) {
+function addJob($stuid,$name, $parent,$subsidy,$men,$sec,$amount) {
 	global $conn;
-	$sql = "insert into form (stuid ,name ,parent, subsidy ,contact , status) values ('$stuid','$name', '$parent','$subsidy', '$contact',0);";
+	$sql = "insert into form (stuid ,name ,parent, subsidy ,men,sec,amount , status) values ('$stuid','$name', '$parent','$subsidy', '$men','$sec','$amount',0);";
 	mysqli_query($conn, $sql) or die("Insert failed, SQL query error"); //執行SQL	
 }
 
 function cancelJob($jobID) {
 	global $conn;
-	$sql = "update form set status = 3 where id=$jobID and status <> 2;";
+	$sql = "update form set status = 4 where id=$jobID and status = 2;";
 	mysqli_query($conn,$sql);
 	//return T/F
 }
 
-function updateJob($id,$stuid,$name, $parent,$subsidy,$contact) {
+function updateJob($id,$stuid,$name, $parent,$subsidy,$men,$sec,$amount) {
 	global $conn;
 	if ($id== -1) {
-		addJob($stuid,$name, $parent,$subsidy,$contact);
+		addJob($stuid,$name, $parent,$subsidy,$men,$sec,$amount);
 	} else {
-		$sql = "update form set stuid='$stuid', name='$name', parent='$parent',subsidy='$subsidy',contact='$contact' where id=$id;";
+		$sql = "update form set stuid='$stuid', name='$name', parent='$parent',subsidy='$subsidy',men='$men',sec='$sec',amount='$amount' where id=$id;";
 		mysqli_query($conn, $sql) or die("Insert failed, SQL query error"); //執行SQL
 	}
 }
@@ -46,7 +46,7 @@ function getJobDetail($id) {
 			"subsidy" => "低收"
 		];
 	} else {
-		$sql = "select stuid,name,parent, subsidy,contact from form where id=$id;";
+		$sql = "select stuid,name,parent, subsidy,men,sec,amount from form where id=$id;";
 		$result=mysqli_query($conn,$sql) or die("DB Error: Cannot retrieve message.");
 		$rs=mysqli_fetch_assoc($result);
 	}
@@ -60,9 +60,16 @@ function setFinished($jobID) {
 	
 }
 
-function setClosed($jobID) {
+function setSecFinished($jobID) {
 	global $conn;
 	$sql = "update form set status = 2 where id=$jobID and status = 1;";
+	mysqli_query($conn,$sql) or die("MySQL query error"); //執行SQL
+	
+}
+
+function setClosed($jobID) {
+	global $conn;
+	$sql = "update form set status = 3 where id=$jobID and status = 2;";
 	mysqli_query($conn,$sql);
 }
 

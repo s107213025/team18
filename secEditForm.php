@@ -1,6 +1,6 @@
 <?php
 session_start();
-if (! isset($_SESSION['uID']) or $_SESSION['uID']!="mentor") {
+if (! isset($_SESSION['uID']) or $_SESSION['uID']!="sec") {
  header("Location: loginForm.php");
 } 
 
@@ -21,7 +21,7 @@ if (! $rs) {
 <title>無標題文件</title>
 </head>
 <body>
-<h1>老師審核</h1>
+<h1>秘書審核</h1>
 <form method="post" action="todoUpdControl.php">
    <input type='hidden' name='id' value='<?php echo $id ?>'>
    stuid: <input name="stuid" type="hidden" id="stuid" value="<?php echo $rs['stuid'] ?>" /><?php echo $rs['stuid'] ?><br>
@@ -31,7 +31,9 @@ if (! $rs) {
       parent: <input name="parent" type="hidden" id="parent" value="<?php echo $rs['parent'] ?>" /><?php echo $rs['parent'] ?> <br>
 
    subsidy: <input  name="subsidy" type="hidden" id="subsidy" value="<?php echo $rs['subsidy'] ?>"/> <?php echo $rs['subsidy'] ?><br>
-   opinion-men: <input name="men" type="text" id="men" value="<?php echo htmlspecialchars($rs['men']);?>" /> <br>
+   opinion-men: <input name="men" type="hidden" id="men" value="<?php echo $rs['men'] ?>" /><?php echo $rs['men'] ?> <br>
+   opinion-sec: <input name="sec" type="text" id="sec" value="<?php echo htmlspecialchars($rs['sec']);?>" /> <br>
+   amount: <input name="amount" type="text" id="amount" value="<?php echo htmlspecialchars($rs['amount']);?>" /> <br>
 
 
 

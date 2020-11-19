@@ -6,10 +6,10 @@ if (! isset($_SESSION['uID']) or $_SESSION['uID']<="") {
 } 
 if ($_SESSION['uID']=='mentor'){
 	$bossMode = 1;
-} elseif($_SESSION['uID']=='pri') {
+} elseif($_SESSION['uID']=='sec') {
 	$bossMode=2;
-}elseif($_SESSION['uID']=='sec') {
-	$bossMode=1;
+}elseif($_SESSION['uID']=='pri') {
+	$bossMode=3;
 }else{
 	$bossMode=0;
 }
@@ -24,7 +24,7 @@ if (isset($_GET['m'])){
 
 
 $result=getJobList($bossMode);
-$jobStatus = array('未審核','老師已審核','通過','不通過');
+$jobStatus = array('未審核','老師已審核','秘書已審核','通過','不通過');
 
 
 ?>
@@ -48,7 +48,9 @@ $jobStatus = array('未審核','老師已審核','通過','不通過');
     <td>name</td>
     <td>parent</td>
 	<td>subsidy</td>
-    <td>contact</td>
+    <td>opinion-men</td>
+	<td>opinion-sec</td>
+	<td>amount</td>
 	<td>status</td>
 	<td>-</td>
   </tr>
@@ -64,12 +66,15 @@ while ($rs = mysqli_fetch_assoc($result)){
 	echo "<td>", htmlspecialchars($rs['name']),"</td>";
 	echo "<td>" , htmlspecialchars($rs['parent']), "</td>";
 	echo "<td>" , htmlspecialchars($rs['subsidy']), "</td>";
-	echo "<td>" , htmlspecialchars($rs['contact']), "</td>" ;
+	echo "<td>" , htmlspecialchars($rs['men']), "</td>" ;
+	echo "<td>" , htmlspecialchars($rs['sec']), "</td>" ;
+	echo "<td>" . $rs['amount'] . "</td>";
+
 	echo "<td>{$jobStatus[$rs['status']]}</td><td>";
 	switch($rs['status']) {
 		case 0:
 			if ($bossMode == 1) {
-				echo "<a href='mentorEditForm.php?id={$rs['id']}'>contact</a>  ";
+				echo "<a href='mentorEditForm.php?id={$rs['id']}'>opinion</a>  ";
 				echo "<a href='todoSetControl.php?act=finish&id={$rs['id']}'>ok</a>  ";				
 			}
 			/* else if ($bossMode == 0) {
@@ -77,8 +82,14 @@ while ($rs = mysqli_fetch_assoc($result)){
 			}*/
 
 			break;
-		case 1:
-			if($bossMode == 2){
+		case 1;
+			if ($bossMode == 2) {
+				echo "<a href='secEditForm.php?id={$rs['id']}'>opinion</a>  ";
+				echo "<a href='todoSetControl.php?act=secfinish&id={$rs['id']}'>ok</a>  ";				
+			}
+			break;
+		case 2:
+			if($bossMode == 3){
 			echo "<a href='todoSetControl.php?act=close&id={$rs['id']}'>yes</a>  " ;
 			echo "<a href='todoSetControl.php?act=cancel&id={$rs['id']}'>no</a>  " ;
 			}
